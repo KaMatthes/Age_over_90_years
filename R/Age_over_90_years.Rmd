@@ -1,0 +1,32 @@
+---
+title: "Age over 90 years"
+author: "Katarina Matthes"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::robobook:
+    code_folding: show
+    self_contained: true
+    highlight: pygments
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Maps
+
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_mapsPLZ(Year=1888, Place="Residential")
+```
+ 
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_mapsPLZ(Year=1900, Place="Residential")
+```
+
+
+
+
