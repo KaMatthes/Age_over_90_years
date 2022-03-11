@@ -73,6 +73,7 @@ col7magma <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "
 # col7cividis <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "cividis")
 
 brk_alt <- c(0,300,600,900,1200,1500,1800,2200)
+brk_alt_reg <- c(0,600,2200)
 
 size_legend <- 20
 size_ggtitle <- 35
@@ -80,5 +81,7 @@ size_ggtitle <- 35
 
 source("R/maps.R")
 source("R/Language_diff.R")
+source("R/Regression_AgeDead.R")
+  
 
 render(paste0("R/Age_over_90_years.Rmd"), output_file = paste0("../output/",today(),"_Age_over_90_years.html"))

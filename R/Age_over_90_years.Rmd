@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Maps
 
-Es scheint so, als ob im Tessin mehr über 90 Jährige Leben verglichen zu den anderen Sprachregionen. Dies ist 1888 und 1900 ersichtlich. Das mehr über 90 Jährige in den Alpinenregionen leben ist auf den Karten nicht ersichtlich.
+Es scheint so, als ob im Tessin mehr über 90 Jährige leben verglichen zu den anderen Sprachregionen. Dies ist 1888 und 1900 ersichtlich. Das mehr über 90 Jährige in den Alpinenregionen leben ist auf den Karten nicht ersichtlich.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_mapsPLZ(Year=1888, Place="Residential")
@@ -27,7 +27,7 @@ function_mapsPLZ(Year=1888, Place="Residential")
 function_mapsPLZ(Year=1900, Place="Residential")
 ```
 
-# Difference Language regions
+# Unterschiede Sprachregionen
 
 Es gibt einen signifikanten Unterschied zwischen den Sprachregionen der Schweiz und dem Anteil Ü90 Jähriger.
 
@@ -50,7 +50,7 @@ data.obs.exp.language %>%
 ```
 
 
-## Regression Original - 1888
+## Poisson Regression Original - 1888
 
 Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
 
@@ -58,7 +58,7 @@ Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jä
 function_language_diff(dataset="Original", YearM=1888, Both="no")
 ```
 
-## Regression UniGe - 1900
+## Poisson Regression UniGe - 1900
 Das Ergebniss von den "Original" Daten kann mit den UniGe Daten bestätigt werden.
 Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
 
@@ -66,7 +66,7 @@ Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jä
 function_language_diff(dataset="UniGe", YearM=1888, Both="no")
 ```
 
-## Regression Original - 1900
+## Poisson Regression Original - 1900
 
 1900 leben nur noch im italienische Teil signifikant mehr Ü90 Jährige als im Deutschsprachige Teil.
 
@@ -74,11 +74,42 @@ function_language_diff(dataset="UniGe", YearM=1888, Both="no")
 function_language_diff(dataset="Original", YearM=1900, Both ="no")
 ```
 
-# Beide Jahre zusammen
+## Poisson Regression Erhebungsjahr
 
 Zwischen den Jahren 1888 und 1900 gibt es keinen signifikanten Unterschied zwischen der Anzahl der Ü90 Jährigen.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_language_diff(dataset="Original",Both ="yes")
+```
+
+# Regression Alter
+
+* Nur Daten mit einem Sterbealter
+* Alle Modelle sind immer nach Erhebungsjahr kontrolliert
+
+Nur das Jahr: Zwischen 1888 und 1900 gibt es keinen sigifikanten Unterschied im Sterbealter
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_age_dead(Var="Year")
+```
+
+Sprachregionen: Es gibt keine signifikanten Unterschiede zwischen Sterbealter und den Sprachregionen
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_age_dead(Var="Language")
+```
+
+Wohnhöhe: Es gibt keine signifikanten Unterschiede zwischen Sterbealter und der Wohnhöhe
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_age_dead(Var="Altitude")
+```
+
+Wohnhöhe Kategorial: Es gibt keine signifikanten Unterschiede zwischen Sterbealter und der Wohnhöhe
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_age_dead(Var="Altitude_cat")
+```
+
+Interaktion Wohnhöhe + Sprachregion: Es gibt keine signifikanten Interaktionen zwischen Sterbealter, Wohnhöhe und Sprachregion
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_age_dead(Var="Altitude_Language")
 ```
 

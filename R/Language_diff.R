@@ -26,13 +26,10 @@ function_language_diff <- function(dataset, YearM, Both) {
   
   else if(dataset =="Original" & Both=="yes") {
     data.model <- data.obs.exp.language %>%
-      mutate(Language=factor(Language, levels=c("German", "French", "Italian")))
+      distinct(Year,.keep_all = TRUE)
     
-    m1 <- summary(Model_lang <- glm(Observed ~ Year  , family="poisson",offset=log(Pop), data=data.model))
-    m2 <- summary(Model_lang <- glm(Observed ~ Year + Language  , family="poisson",offset=log(Pop), data=data.model))
-    
-    m_list <- list(m1, m2)
-    return(m_list)
+    summary(Model_lang <- glm(Number_Alessia ~ Year  , family="poisson",offset=log(Pop_total), data=data.model))
+  
     
   }
   
