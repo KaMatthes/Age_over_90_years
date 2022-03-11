@@ -17,16 +17,68 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Maps
 
+Es scheint so, als ob im Tessin mehr über 90 Jährige Leben verglichen zu den anderen Sprachregionen. Dies ist 1888 und 1900 ersichtlich. Das mehr über 90 Jährige in den Alpinenregionen leben ist auf den Karten nicht ersichtlich.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_mapsPLZ(Year=1888, Place="Residential")
 ```
- 
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_mapsPLZ(Year=1900, Place="Residential")
 ```
 
+# Difference Language regions
+
+Es gibt einen signifikanten Unterschied zwischen den Sprachregionen der Schweiz und dem Anteil Ü90 Jähriger.
+
+* Poisson Regression
+* Da die Anzahl der Ü90 in 3 Datensätze unterschiedlich sind, habe ich die Regression auch noch für den UniGe Datensatz durchgeführt (dort weiss ich die Sprachregionen). 
+* Im Datensatz "AgeDistribution" habe ich nur die Altersverteilung der gesamten Schweiz, aber nicht nach Sprachregionen.
+* Die Anzahl der Ü90 im AgeDistrubtion file erscheint mir verglichen zu dem "Original" Datensatz und dem UniGe Datensatz ein wenig zu hoch.
+* Die Gesamtbevölkerung erscheint mir wiederrum im UniGe Datensatz zu niedrig
+* Für die Berechnung des "Original" Datensatzes habe ich die beoachteten Werte aus dem Datensatz genommen und die Bevölkerung nach Sprachregionen aus dem Datensatz "Population_district_1860_2008.xlsx" (Ich weiss nicht, wo der herkommt. Habe ihn für mein UniGe Projekt benutzt)
+* Für die UniGe Daten von 1888, sind alle Daten aus der Volkszählung 
 
 
+## Tabelle 
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.language.RData")
+data.obs.exp.language %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
+
+
+## Regression Original - 1888
+
+Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_language_diff(dataset="Original", YearM=1888, Both="no")
+```
+
+## Regression UniGe - 1900
+Das Ergebniss von den "Original" Daten kann mit den UniGe Daten bestätigt werden.
+Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_language_diff(dataset="UniGe", YearM=1888, Both="no")
+```
+
+## Regression Original - 1900
+
+1900 leben nur noch im italienische Teil signifikant mehr Ü90 Jährige als im Deutschsprachige Teil.
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_language_diff(dataset="Original", YearM=1900, Both ="no")
+```
+
+# Beide Jahre zusammen
+
+Zwischen den Jahren 1888 und 1900 gibt es keinen signifikanten Unterschied zwischen der Anzahl der Ü90 Jährigen.
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_language_diff(dataset="Original",Both ="yes")
+```
 

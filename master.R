@@ -79,5 +79,6 @@ size_ggtitle <- 35
 
 
 source("R/maps.R")
+source("R/Language_diff.R")
 
 render(paste0("R/Age_over_90_years.Rmd"), output_file = paste0("../output/",today(),"_Age_over_90_years.html"))
