@@ -3,14 +3,13 @@ function_mapsPLZ <- function(Year, Place) {
   # load data
   load("../data/data_age90.RData")
   #load("../data/data_age90.RData")
-  
-  brk_alt <- c(0,300,600,900,1200,1500,1800,2200)
+
   
   
   data_age90_map <- data_age90 %>%
-    dplyr::mutate(B_Hoehe_cat = cut(B_Hoehe,breaks=brk_alt),
-           W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt),
-           G_Hoehe_cat = cut(G_Hoehe,breaks=brk_alt)) %>%
+    dplyr::mutate(B_Hoehe_cat = cut(B_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
+           W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
+           G_Hoehe_cat = cut(G_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE)) %>%
     filter(Erhebungsjahr == Year)
   # load map switzerland
   
@@ -75,11 +74,11 @@ function_mapsPLZ <- function(Year, Place) {
                   guide = "none") +
       geom_sf(data=  map_lake, fill = "#D6F1FF",color = "transparent") +
       geom_point(data=datMaps,aes(x=G_E, y= G_N, col=G_Hoehe_cat), lwd=4)+
-      ggtitle(paste(Year,"Birthplace"))+
+      ggtitle(paste(Year))+
       scale_colour_manual("Altitude:",
-                          values = col7magma,
-                          breaks=c("(0,300]","(300,600]","(600,900]","(900,1.2e+03]","(1.2e+03,1.5e+03]","(1.5e+03,1.8e+03]","(1.8e+03,2.2e+03]"),
-                          labels=c("0-299","300-599","600-899","900-1199","1200-1499","1500-1799",">1799"))+
+                          values = col4magma,
+                          breaks=c("[0,400]","(400,600]","(600,1e+03]","(1e+03,2.2e+03]"),
+                          labels=c("0-399","400-599","600-999",">1000"))+
       scale_fill_manual("Language:",
                         values=col3grey)+
       theme_bw()+
@@ -111,11 +110,11 @@ function_mapsPLZ <- function(Year, Place) {
                   guide = "none") +
       geom_sf(data=  map_lake, fill = "#D6F1FF",color = "transparent") +
       geom_point(data=datMaps,aes(x=W_E, y= W_N, col=W_Hoehe_cat), lwd=4)+
-      ggtitle(paste(Year,"Residential"))+
+      ggtitle(paste(Year))+
       scale_colour_manual("Altitude:",
-                        values = col7magma,
-                        breaks=c("(0,300]","(300,600]","(600,900]","(900,1.2e+03]","(1.2e+03,1.5e+03]","(1.5e+03,1.8e+03]","(1.8e+03,2.2e+03]"),
-                        labels=c("0-299","300-599","600-899","900-1199","1200-1499","1500-1799",">1799"))+
+                          values = col4magma,
+                          breaks=c("[0,400]","(400,600]","(600,1e+03]","(1e+03,2.2e+03]"),
+                          labels=c("0-399","400-599","600-999",">1000"))+
       scale_fill_manual("Language:",
                         values=col3grey)+
       theme_bw()+

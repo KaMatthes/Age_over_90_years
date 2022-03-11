@@ -68,19 +68,24 @@ library(lubridate)
 
 col3grey <- c("#bdbdbd","#f0f0f0", "#737373")
 col7magma <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "magma")
+col4magma <- viridis(4, alpha = 1, begin = 1, end = 0, direction = 1, option = "magma")
 # col7viridis <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "viridis")
 # col7rocket <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "rocket")
 # col7cividis <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "cividis")
 
 brk_alt <- c(0,300,600,900,1200,1500,1800,2200)
 brk_alt_reg <- c(0,600,2200)
+brk_alt_poisson <- c(0,400,600,1000,2200)
+brk_age <- c(90,92,94,96,102)
 
 size_legend <- 20
 size_ggtitle <- 35
 
 
 source("R/maps.R")
+source("R/maps_age.R")
 source("R/Language_diff.R")
+source("R/Altitude_diff.R")
 source("R/Regression_AgeDead.R")
   
 

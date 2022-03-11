@@ -17,14 +17,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Maps
 
-Es scheint so, als ob im Tessin mehr über 90 Jährige leben verglichen zu den anderen Sprachregionen. Dies ist 1888 und 1900 ersichtlich. Das mehr über 90 Jährige in den Alpinenregionen leben ist auf den Karten nicht ersichtlich.
-
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
-function_mapsPLZ(Year=1888, Place="Residential")
+function_mapsPLZ_age(Year=1888, Place="Residential")
 ```
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
-function_mapsPLZ(Year=1900, Place="Residential")
+function_mapsPLZ_age(Year=1900, Place="Residential")
 ```
 
 # Unterschiede Sprachregionen
@@ -50,7 +48,7 @@ data.obs.exp.language %>%
 ```
 
 
-## Poisson Regression Original - 1888
+## Original - 1888
 
 Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
 
@@ -58,15 +56,15 @@ Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jä
 function_language_diff(dataset="Original", YearM=1888, Both="no")
 ```
 
-## Poisson Regression UniGe - 1900
-Das Ergebniss von den "Original" Daten kann mit den UniGe Daten bestätigt werden.
+## UniGe - 1888
+Das Ergebnis von den "Original" Daten kann mit den UniGe Daten bestätigt werden.
 Der Französische Teil und der Italienische Teil haben signifikant mehr Ü90 Jährige als der Deutschsprachige Teil
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_language_diff(dataset="UniGe", YearM=1888, Both="no")
 ```
 
-## Poisson Regression Original - 1900
+## Original - 1900
 
 1900 leben nur noch im italienische Teil signifikant mehr Ü90 Jährige als im Deutschsprachige Teil.
 
@@ -74,12 +72,41 @@ function_language_diff(dataset="UniGe", YearM=1888, Both="no")
 function_language_diff(dataset="Original", YearM=1900, Both ="no")
 ```
 
-## Poisson Regression Erhebungsjahr
+# Unterschiede Erhebungsjahr
 
 Zwischen den Jahren 1888 und 1900 gibt es keinen signifikanten Unterschied zwischen der Anzahl der Ü90 Jährigen.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_language_diff(dataset="Original",Both ="yes")
+```
+
+
+# Unterschiede Höhe Wohnort
+
+## Tabelle 
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.altitude.RData")
+data.obs.exp.altitude %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
+
+
+## 1888
+
+Es leben auf allen Höhen mehr Ü90 Jährige verglichen zu den Wohnorten auf 400-599m.
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_diff( YearM=1888)
+```
+
+## 1900
+
+Es leben in den Wohnorten auf Höhe > 1000m signifikant mehr Ü90 Jährige verglichen zu den Wohnorten in der Höhe 400-599m.
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_diff(YearM=1900)
 ```
 
 # Regression Alter

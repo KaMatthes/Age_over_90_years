@@ -35,7 +35,7 @@ function_age_dead_data <- function() {
                              "Wallis" ="French",
                              "Zug" = "German",
                              "Zürich" = "German"),
-           W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_reg))
+           W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_reg, include.lowest = TRUE))
   
   save(data_age,file=paste0("data/data_age.RData"))
   write.xlsx(data_age,file=paste0("data/data_age.xlsx"),rowNames=FALSE, overwrite = TRUE)
