@@ -25,6 +25,11 @@ function_mapsPLZ_age(Year=1888, Place="Residential")
 function_mapsPLZ_age(Year=1900, Place="Residential")
 ```
 
+Spatial prediction
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_spacial_age()
+```
+
 # Unterschiede Sprachregionen
 
 Es gibt einen signifikanten Unterschied zwischen den Sprachregionen der Schweiz und dem Anteil Ü90 Jähriger.

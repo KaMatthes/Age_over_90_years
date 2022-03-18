@@ -13,6 +13,9 @@ library(cowplot)
 library(rmarkdown)
 library(kableExtra)
 library(lubridate)
+library(INLA)
+library(inlabru)
+
 
 # 
 # col7 <- c("#ffffb2","#c7e9b4","#7fcdbb","#41b6c4","#225ea8", "#253494","#081d58")
@@ -87,6 +90,7 @@ source("R/maps_age.R")
 source("R/Language_diff.R")
 source("R/Altitude_diff.R")
 source("R/Regression_AgeDead.R")
+source("R/Spacial_Point_Process_Age.R")
   
 
 render(paste0("R/Age_over_90_years.Rmd"), output_file = paste0("../output/",today(),"_Age_over_90_years.html"))
