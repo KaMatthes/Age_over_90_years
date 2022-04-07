@@ -61,8 +61,6 @@ fit = bru(cmp, lik,
 
 
 
-# Predict Gorilla nest intensity
-
 pxl <- pixels(mesh1, nx=200, ny=200,mask = map_polygon)
 
 pred_space <- predict(fit,pxl,n.samples=10000,
