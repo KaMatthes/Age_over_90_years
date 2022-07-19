@@ -35,12 +35,12 @@ function_spacial_age()
 Es gibt einen signifikanten Unterschied zwischen den Sprachregionen der Schweiz und dem Anteil Ü90 Jähriger.
 
 * Poisson Regression
-* Da die Anzahl der Ü90 in 3 Datensätze unterschiedlich sind, habe ich die Regression auch noch für den UniGe Datensatz durchgeführt (dort weiss ich die Sprachregionen). 
+* Da die Anzahl der Ü90 in 3 Datensätze unterschiedlich sind, habe ich die Regression auch noch für den UniGe Datensatz durchgeführt (dort weiss ich die Sprachregionen).
 * Im Datensatz "AgeDistribution" habe ich nur die Altersverteilung der gesamten Schweiz, aber nicht nach Sprachregionen.
 * Die Anzahl der Ü90 im AgeDistrubtion file erscheint mir verglichen zu dem "Original" Datensatz und dem UniGe Datensatz ein wenig zu hoch.
 * Die Gesamtbevölkerung erscheint mir wiederrum im UniGe Datensatz zu niedrig
 * Für die Berechnung des "Original" Datensatzes habe ich die beoachteten Werte aus dem Datensatz genommen und die Bevölkerung nach Sprachregionen aus dem Datensatz "Population_district_1860_2008.xlsx" (Ich weiss nicht, wo der herkommt. Habe ihn für mein UniGe Projekt benutzt)
-* Für die UniGe Daten von 1888, sind alle Daten aus der Volkszählung 
+* Für die UniGe Daten von 1888, sind alle Daten aus der Volkszählung
 
 
 ## Tabelle 
@@ -52,6 +52,17 @@ data.obs.exp.language %>%
   kable_material(c("striped", "hover"),full_width = F,position = "left")
 ```
 
+## Table Example Presentation
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.language.RData")
+data.obs.exp.language %>%
+  filter(Year==1888) %>%
+  mutate(Expected = round(Expected,0)) %>%
+  dplyr::select(Language,Population = Pop, Observed, Expected) %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
 
 ## Original - 1888
 
@@ -88,7 +99,7 @@ function_language_diff(dataset="Original",Both ="yes")
 
 # Unterschiede Höhe Wohnort
 
-## Tabelle 
+## Tabelle
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.altitude.RData")
