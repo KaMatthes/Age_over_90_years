@@ -1,13 +1,13 @@
-function_altitude_diff <- function(YearM) {
+function_altitude_diff_sen <- function(YearM) {
   
-  load("../data/data.obs.exp.altitude.RData")
+  load("data/data.obs.exp.altitude_sen.RData")
 
-  data.model <- data.obs.exp.altitude %>%
+  data.model <- data.obs.exp.altitude_sen %>%
       filter(Year == YearM) %>%
-      mutate(Altitude=factor(Altitude, levels=c("< 600","600-999",">= 1000")))
+      mutate(Altitude=factor(Altitude, levels=c("< 600","600-899",">= 900")))
     
     mod_sum <- summary(Model_alt <- glm(Observed ~ Altitude , family="poisson",offset=log(Population), data=data.model ))
-    
+  
     
     OR <- data.frame(exp(mod_sum$coefficients[,1])) %>%
       mutate(OR=format(round(exp.mod_sum.coefficients...1..,2),nsmall=2),

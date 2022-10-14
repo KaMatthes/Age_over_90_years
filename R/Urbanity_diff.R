@@ -1,36 +1,36 @@
-function_altitude_diff <- function(YearM) {
+function_urbanity_diff <- function(YearM) {
   
-  load("../data/data.obs.exp.altitude.RData")
+  load("../data/data.obs.exp.urbanity.RData")
 
-  data.model <- data.obs.exp.altitude %>%
+  data.model <- data.obs.exp.urbanity %>%
       filter(Year == YearM) %>%
-      mutate(Altitude=factor(Altitude, levels=c("< 600","600-999",">= 1000")))
+      mutate(Urbanity=factor(Urbanity, levels=c("urban","rural")))
     
-    mod_sum <- summary(Model_alt <- glm(Observed ~ Altitude , family="poisson",offset=log(Population), data=data.model ))
+    mod_sum <- summary(Model_urbanity <- glm(Observed ~ Urbanity , family="poisson",offset=log(Population), data=data.model ))
     
     
     OR <- data.frame(exp(mod_sum$coefficients[,1])) %>%
       mutate(OR=format(round(exp.mod_sum.coefficients...1..,2),nsmall=2),
-             Altitude = row.names(.)) %>%
-      filter(!Altitude=="(Intercept)") %>%
+             Urbanity= row.names(.)) %>%
+      filter(!Urbanity=="(Intercept)") %>%
       dplyr::select(-1)
     
     CIl <-  data.frame(exp(mod_sum$coefficients[,1]-1.96*mod_sum$coefficients[,2])) %>%
       mutate(CIl=format(round(exp.mod_sum.coefficients...1....1.96...mod_sum.coefficients...,2),nsmall=2),
-             Altitude = row.names(.)) %>%
-      filter(!Altitude=="(Intercept)") %>%
+             Urbanity= row.names(.)) %>%
+      filter(!Urbanity=="(Intercept)") %>%
       dplyr::select(-1)
     
     CIu <-  data.frame(exp(mod_sum$coefficients[,1]+1.96*mod_sum$coefficients[,2]))  %>%
       mutate(CIu= format(round(exp.mod_sum.coefficients...1....1.96...mod_sum.coefficients...,2),nsmall=2),
-             Altitude = row.names(.)) %>%
-      filter(!Altitude=="(Intercept)") %>%
+             Urbanity= row.names(.)) %>%
+      filter(!Urbanity=="(Intercept)") %>%
       dplyr::select(-1)
     
     mod_p <- data.frame(mod_sum$coefficients[,4])  %>%
       mutate(p_value= format(round(mod_sum.coefficients...4.,5),nsmall=2),
-             Altitude = row.names(.)) %>%
-      filter(!Altitude=="(Intercept)") %>%
+             Urbanity= row.names(.)) %>%
+      filter(!Urbanity=="(Intercept)") %>%
       dplyr::select(-1)
     
     
@@ -39,7 +39,7 @@ function_altitude_diff <- function(YearM) {
       left_join(CIu) %>%
       left_join(mod_p) %>%
       mutate(CI = paste0(CIl," - ", CIu)) %>%
-      dplyr::select(Altitude, OR, CI, p_value)
+      dplyr::select(Urbanity, OR, CI, p_value)
     
     res %>%
       kbl() %>%

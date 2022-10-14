@@ -1,5 +1,5 @@
 function_age_dead <- function(Var) {
-  load("../data/data_age.RData")
+  load("data/data_age.RData")
   
  
   if (Var=="Year") {

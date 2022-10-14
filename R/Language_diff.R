@@ -50,15 +50,15 @@ function_language_diff <- function(dataset, YearM, Both) {
   }
   
   
-  else if(dataset =="UniGe" & Both=="no") {
-    data.model <- data.obs.exp.language %>%
-      filter(Year == YearM) %>%
-      mutate(Language=factor(Language, levels=c("German", "French", "Italian")))
-    
-    summary(Model_lang <- glm(Observed_UniGe ~ Language , family="poisson",offset=log(Pop_UniGe), data=data.model))
-    
-  }
-  
+  # else if(dataset =="UniGe" & Both=="no") {
+  #   data.model <- data.obs.exp.language %>%
+  #     filter(Year == YearM) %>%
+  #     mutate(Language=factor(Language, levels=c("German", "French", "Italian")))
+  #   
+  #   summary(Model_lang <- glm(Observed_UniGe ~ Language , family="poisson",offset=log(Pop_UniGe), data=data.model))
+  #   
+  # }
+  # 
   
   else if(dataset =="Original" & Both=="yes") {
     data.model <- data.obs.exp.language %>%
