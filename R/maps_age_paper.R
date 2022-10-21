@@ -1,16 +1,15 @@
-function_mapsPLZ <- function(Year, Place) {
-
-  # load data
-  load("data/data_age90.RData")
+load("data/data_age90.RData")
   #load("../data/data_age90.RData")
 
   
   
   data_age90_map <- data_age90 %>%
-    dplyr::mutate(B_Hoehe_cat = cut(B_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
-           W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
-           G_Hoehe_cat = cut(G_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE)) %>%
-    filter(Erhebungsjahr == Year)
+    dplyr::mutate(Alter_cat = cut(Alter,breaks=brk_age ,include.lowest = TRUE),
+                  Alter_cat = ifelse(is.na(Alter_cat), "no Info", Alter_cat),
+                  Alter_cat = as.factor(Alter_cat),
+                  B_Hoehe_cat = cut(B_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
+                  W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE),
+                  G_Hoehe_cat = cut(G_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE))
   # load map switzerland
   
    map_swiss <- read_sf("data/maps/Timo/g2l15.shp")
@@ -47,7 +46,7 @@ function_mapsPLZ <- function(Year, Place) {
                               "9" = "German",
                               "1" = "German"),
             Language = as.factor(Language))
-
+   
    # map_lake <- read_sf("data/maps/Timo/g2s15.shp")
    map_lake <- read_sf("data/maps/Timo/g2s15.shp")
    
@@ -58,70 +57,38 @@ function_mapsPLZ <- function(Year, Place) {
     as("SpatialPixelsDataFrame") %>%
     as.data.frame() %>%
     rename(value = X02.relief.ascii)
-
   
-  # decide which place
-
-  if(Place=="Birthplace") {
-    datMaps <-  data_age90_map %>%
-      filter(!G_E==0)
-
-    plot_map <- ggplot()+
-      geom_sf(data=  map_canton, aes(fill= Language),alpha=1,col="black", size=0.1)+
-      geom_raster(data = relief,inherit.aes = FALSE,aes(x = x,y = y,alpha = value), fill="grey10")+
-      scale_alpha(name = "",
-                  range = c(0.6, 0),
-                  guide = "none") +
-      geom_sf(data=  map_lake, fill = "#D6F1FF",color = "transparent") +
-      geom_point(data=datMaps,aes(x=G_E, y= G_N, col=G_Hoehe_cat), lwd=4)+
-      ggtitle(paste(Year))+
-      scale_colour_manual("Altitude:",
-                          values = col3magma,
-                          breaks=c("[0,600]","(600,1e+03]","(1e+03,Inf]"),
-                          labels=c("0-599","600-999",">1000"))+
-      scale_fill_manual("Language:",
-                        values=col3grey)+
-      theme_bw()+
-      theme(
-        panel.background=element_blank(),
-        panel.grid.minor=element_blank(),
-        panel.grid.major=element_blank(),
-        axis.title=element_blank(),
-        axis.line=element_blank(),
-        axis.text=element_blank(),
-        axis.ticks=element_blank(),
-        panel.border = element_blank(),
-        legend.text=element_text(size=size_legend),
-        legend.title =element_text(size=size_legend),
-        plot.title = element_text(size =size_ggtitle),
-        legend.position = "bottom")
-
-  }
-
-  else if(Place=="Residential") {
     datMaps <-   data_age90_map %>%
       filter(!W_E==0)
     
-    plot_map<- ggplot()+
-      geom_sf(data=  map_canton, aes(fill= Language),alpha=1,col="grey", size=0.1)+
+   Figure1 <- ggplot()+
+      geom_sf(data=  map_canton, aes(fill= Language),alpha=1,col="grey40", size=0.1)+
+      facet_wrap(~Erhebungsjahr) +
       geom_raster(data = relief,inherit.aes = FALSE,aes(x = x,y = y,alpha = value), fill="grey10")+
       scale_alpha(name = "",
                   range = c(0.6, 0),
                   guide = "none") +
       geom_sf(data=  map_lake, fill = "#D6F1FF",color = "transparent") +
-      geom_point(data=datMaps,aes(x=W_E, y= W_N, col=W_Hoehe_cat), lwd=4)+
-      ggtitle(paste(Year))+
+      geom_point(data=datMaps,aes(x=W_E, y= W_N, col=W_Hoehe_cat, size=Alter_cat))+
+      # ggtitle(paste(Year))+
+      scale_size_manual("Age:",
+                        values = c(2,4,6,8,0.5),
+                          breaks=c("1","2","3","4", "no Info"),
+                          labels=c("90-92","93-94","95-96","97-102", "no info"))+
       scale_colour_manual("Altitude:",
                           values = col3magma,
                           breaks=c("[0,600]","(600,1e+03]","(1e+03,Inf]"),
-                          labels=c("0-599","600-999",">1000"))+
+                          labels=c("0-599","600-999",">=1000"))+
       scale_fill_manual("Language:",
                         values=col3grey)+
+      guides(color = guide_legend(override.aes = list(size = 7)))+
       theme_bw()+
       theme(
         panel.background=element_blank(),
         panel.grid.minor=element_blank(),
         panel.grid.major=element_blank(),
+        strip.text = element_text(size=size_striptext),
+        strip.background = element_blank(),
         axis.title=element_blank(),
         axis.line=element_blank(),
         axis.text=element_blank(),
@@ -129,10 +96,11 @@ function_mapsPLZ <- function(Year, Place) {
         panel.border = element_blank(),
         legend.text=element_text(size=size_legend),
         legend.title =element_text(size=size_legend),
+        legend.direction = "horizontal", 
+        legend.box = "vertical",
         plot.title = element_text(size =size_ggtitle),
         legend.position = "bottom")
-}
-  return(plot_map)
- 
-  
-}
+    
+    cowplot::save_plot("output/Figure1.pdf", Figure1,base_height=10,base_width=20)
+    
+    

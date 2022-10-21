@@ -33,7 +33,7 @@ function_mapsPLZ_age(Year=1900, Place="Residential")
 # Erhebungsjahr
 
 <!-- * Poisson Regression -->
-<!-- * Zwischen den Jahren 1888 und 1900 gibt es keinen signifikanten Unterschied zwischen der Anzahl der Ü90 Jährigen. -->
+Zwischen den Jahren 1888 und 1900 gibt es keinen signifikanten Unterschied zwischen der Anzahl der Ü90 Jährigen.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_language_diff(dataset="Original",Both ="yes")
@@ -42,6 +42,8 @@ function_language_diff(dataset="Original",Both ="yes")
 # Geschlecht
 
 ## 1888
+
+Keine Unterschiede zwischen den Geschlechtern.
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.sex.RData")
@@ -60,6 +62,9 @@ function_sex_diff(YearM=1888)
 
 
 ## 1900
+
+Signifikant mehr Ü90 Frauen als Männer.
+
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.sex.RData")
@@ -80,6 +85,9 @@ function_sex_diff(YearM=1900)
 
 ## 1888
 
+Signifikant mehr Ü90 Personen im städtischen Gebieten.
+
+
 ```{r echo=FALSE}
 load("../data/data.obs.exp.urbanity.RData")
 data.obs.exp.urbanity %>%
@@ -97,6 +105,9 @@ function_urbanity_diff(YearM=1888)
 
 
 ## 1900
+
+Signifikant mehr Ü90 Personen im städtischen Gebieten.
+
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.urbanity.RData")
@@ -129,7 +140,7 @@ function_urbanity_diff(YearM=1900)
 <!-- * Für die UniGe Daten von 1888, sind alle Daten aus der Volkszählung -->
 
 
-<!-- ## Tabelle  -->
+<!-- ## Tabelle -->
 
 <!-- ```{r echo=FALSE} -->
 <!-- load("../data/data.obs.exp.language.RData") -->
@@ -139,6 +150,9 @@ function_urbanity_diff(YearM=1900)
 <!-- ``` -->
 
 ## 1888
+
+Signifikant mehr Ü90 in den französischen und italienischen Sprachregionen verglichen zu den deutschen Sprachregionen.
+
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.language.RData")
@@ -159,6 +173,9 @@ function_language_diff(dataset="Original", YearM=1888, Both="no")
 
 
 ## 1900
+
+Signifikant mehr Ü90 in den italienischen Sprachregionen verglichen zu den deutschen Sprachregionen.
+
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.language.RData")
@@ -192,6 +209,9 @@ function_language_diff(dataset="Original", YearM=1900, Both="no")
 
 ## 1888
 
+Signifikant mehr Ü90 in den Gebieten "600-999m" und ">=1000m", verglichen zu "<600m"
+
+
 ```{r echo=FALSE}
 load("../data/data.obs.exp.altitude.RData")
 data.obs.exp.altitude %>%
@@ -213,6 +233,8 @@ function_altitude_diff(YearM=1888)
 
 ## 1900
 
+Signifikant mehr Ü90 in den Gebieten  ">=1000m", verglichen zu "<600m"
+
 <!-- * Poisson Regression -->
 <!-- * Es leben in den Wohnorten auf Höhe > 1000m signifikant mehr Ü90 Jährige verglichen zu den Wohnorten in der Höhe 400-599m. -->
 
@@ -230,9 +252,48 @@ data.obs.exp.altitude %>%
 function_altitude_diff(YearM=1900)
 ```
 
+## Sensitivity
+
+Sensitivity Analyse wie besprochen. Aber statistisch gesehen, ist das gar nicht gut, das so zu machen ;). Man definiert erst die Gruppen und diese bleiben dann so (oder benutzt statische Methoden, um die Gruppen zu bestimmen, was wir jetzt hier aber nicht machen wollen...). Aber verschiedene
+Gruppen zu testen und zu schauen, welche "Kompination" signifikant ist, ist eher ungünstig. Ich verstehe warum ihr es machen wollt, aber
+aus meiner Sicht eher ungünstig. Ich würde es nicht im Paper (auch nicht im Anhang) zeigen wollen. Falls ein Historiker nachfragt, würd ich eher beschreiben, warum wir uns für die Gruppierung entschieden haben. Aber verschiede Gruppeneinteilungen testen ist aus Statistiker:innen-Sicht nicht gut.
+
+### 1888
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_diff_sen(YearM=1888)
+```
+
+### 1900
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_diff_sen(YearM=1900)
+```
+
+
+<!-- # Geschlecht und höhe Wohnort -->
+
+<!-- ## 1900 -->
+
+<!-- ```{r echo=FALSE} -->
+<!-- load("data/data.obs.exp.altitude.male.RData") -->
+<!-- data.obs.exp.altitude.male %>% -->
+<!--   mutate(Expected = round(Expected,0)) %>% -->
+<!--    select(Altitude,Population, Observed, Expected) %>% -->
+<!--   kbl() %>% -->
+<!--   kable_material(c("striped", "hover"),full_width = F,position = "left") -->
+<!-- ``` -->
+
+
+<!-- ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15} -->
+<!-- function_altitude_male_diff() -->
+<!-- ``` -->
+
+
 # Frauen und höhe Wohnort
 
-## 1900
+Nur Daten von 1900
+<br />
+<br />
+Signifikant mehr Ü90 Frauen auf ">=1000m" verglichen zu "<600m".
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.altitude.female.RData")
@@ -250,7 +311,11 @@ function_altitude_female_diff()
 
 # Männer und höhe Wohnort
 
-## 1900
+Nur Daten von 1900
+<br />
+<br />
+Signifikant mehr Ü90 Männer auf ">=1000m" verglichen zu "<600m".
+
 
 ```{r echo=FALSE}
 load("../data/data.obs.exp.altitude.male.RData")
@@ -266,6 +331,95 @@ data.obs.exp.altitude.male %>%
 function_altitude_male_diff()
 ```
 
+
+
+# <600m und Geschlecht
+
+Nur Daten von 1900
+<br />
+<br />
+Signifikant weniger Ü90 Männer auf <600m" als Frauen.
+
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.sex.altitude.600.RData")
+data.obs.exp.sex.altitude %>%
+  mutate(Expected = round(Expected,0)) %>%
+   select(Sex,Altitude,Population, Observed, Expected) %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
+
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_sex_diff("600")
+```
+
+# 600 - 999 m und Geschlecht
+
+Nur Daten von 1900
+<br />
+<br />
+Keine Unterschiede auf "600-999m".
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.sex.altitude.600_999.RData")
+data.obs.exp.sex.altitude %>%
+  mutate(Expected = round(Expected,0)) %>%
+   select(Sex,Altitude,Population, Observed, Expected) %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
+
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_sex_diff("600_999")
+```
+
+# > 1000 m und Geschlecht
+
+Nur Daten von 1900
+<br />
+<br />
+Keine Unterschiede auf ">= 1000 m".
+
+```{r echo=FALSE}
+load("../data/data.obs.exp.sex.altitude.1000.RData")
+data.obs.exp.sex.altitude %>%
+  mutate(Expected = round(Expected,0)) %>%
+   select(Sex,Altitude,Population, Observed, Expected) %>%
+  kbl() %>%
+  kable_material(c("striped", "hover"),full_width = F,position = "left")
+```
+
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_altitude_sex_diff("1000")
+```
+
+# Regression CO-factors
+
+Je niedriger BIP, desto mehr Ü90 (aber nicht signifikant), trotzdem andere Richtung als erwartet. Aber liegt es vielleicht daran, dass BIP und Wohnhöhe zusammenhängen? Genauso wie BIP und Sprachregionen? Das heisst eigentlich ist eher die Sprachregion und die Wohnhöhe der Faktor (unterschiedliche Lebensweisen), als BIP. In diesem Model kann ich nicht nach Sprachregion anpassen, dafür bräuchte ich noch ein sheet mit
+Sprache für jeden Bezirk, Wohnhöhe pro Bezirk ist eher schwierig (schwankt ja manchmal sehr pro Bezirk). TB war jetzt auch etwas schwieriger, da ich etwas andere Bezirke habe, wie in dieser Studie, diese müsste ich abgleiche, dauert etwas. Das gleiche wäre mit den Sprachregionen. Die Spitaldichte wäre noch interessant, aber diese war nicht mit den Bezirken aus dem sheet "3) Bezirke Vergleich" abgeglichen. 
+
+<br />
+<br />
+
+Ansonsten ist die Körpergrösse noch interessant, 1900 zwar nicht signifikant, aber gleicher Trend wie 1888. Aber wir haben auch ein Power Problem. Haben ja nur wenige Ü90 Jährige pro Bezirk.
+
+## 1888
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_regression(YearM = 1888)
+```
+
+
+
+## 1900
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
+function_regression(YearM = 1900)
+```
 
 <!-- # Regression Alter -->
 

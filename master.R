@@ -13,6 +13,8 @@ library(cowplot)
 library(rmarkdown)
 library(kableExtra)
 library(lubridate)
+library(robmixglm)
+
 
 library(conflicted)
 
@@ -107,8 +109,11 @@ source("R/Sex_diff.R")
 source("R/Urbanity_diff.R")
 source("R/Language_diff.R")
 source("R/Altitude_diff.R")
+source("R/Altitude_diff_sen.R")
 source("R/Altitude_female_diff.R")
 source("R/Altitude_male_diff.R")
+source("R/Altitude_sex_diff.R")
+source("R/Regression_Districts.R")
 # source("R/Regression_AgeDead.R")
 # source("R/Spacial_Point_Process_Age.R")
   

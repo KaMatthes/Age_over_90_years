@@ -60,8 +60,7 @@ function_mapsPLZ_age <- function(Year, Place) {
     mask(map_swiss) %>%
     as("SpatialPixelsDataFrame") %>%
     as.data.frame() %>%
-    rename(value = `X02.relief.ascii`)
-
+    rename(value = X02.relief.ascii)
   
   # decide which place
 
@@ -83,9 +82,9 @@ function_mapsPLZ_age <- function(Year, Place) {
                         breaks=c("1","2","3","4", "no Info"),
                         labels=c("90-92","93-94","95-96","97-102", "no info"))+
       scale_colour_manual("Altitude:",
-                          values = col4magma,
-                          breaks=c("[0,400]","(400,600]","(600,1e+03]","(1e+03,2.2e+03]"),
-                          labels=c("0-399","400-599","600-999",">1000"))+
+                          values = col3magma,
+                          breaks=c("[0,600]","(600,1e+03]","(1e+03,Inf]"),
+                          labels=c("0-599","600-999",">1000"))+
       scale_fill_manual("Language:",
                         values=col3grey)+
       guides(color = guide_legend(override.aes = list(size = 7)))+
@@ -112,7 +111,7 @@ function_mapsPLZ_age <- function(Year, Place) {
     datMaps <-   data_age90_map %>%
       filter(!W_E==0)
     
-    plot_map_age<- ggplot()+
+    plot_map_age <- ggplot()+
       geom_sf(data=  map_canton, aes(fill= Language),alpha=1,col="black", size=0.1)+
       geom_raster(data = relief,inherit.aes = FALSE,aes(x = x,y = y,alpha = value), fill="grey10")+
       scale_alpha(name = "",
@@ -126,9 +125,9 @@ function_mapsPLZ_age <- function(Year, Place) {
                           breaks=c("1","2","3","4", "no Info"),
                           labels=c("90-92","93-94","95-96","97-102", "no info"))+
       scale_colour_manual("Altitude:",
-                          values = col4magma,
-                          breaks=c("[0,400]","(400,600]","(600,1e+03]","(1e+03,2.2e+03]"),
-                          labels=c("0-399","400-599","600-999",">1000"))+
+                          values = col3magma,
+                          breaks=c("[0,600]","(600,1e+03]","(1e+03,Inf]"),
+                          labels=c("0-599","600-999",">1000"))+
       scale_fill_manual("Language:",
                         values=col3grey)+
       guides(color = guide_legend(override.aes = list(size = 7)))+

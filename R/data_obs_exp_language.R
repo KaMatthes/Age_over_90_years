@@ -1,14 +1,14 @@
 function_obs_exp_language <- function() {
   load("data/data_age90.RData")
   
-  dat.pop <- readxl::read_excel(paste0("data_raw/Population_district_1888_1900.xlsx"), sheet="Sheet1") %>%
+  dat.pop <- readxl::read_excel("data_raw/Population_district_1888_1900.xlsx", sheet="Sheet1") %>%
     gather(., Year, population, `1888`:`1900`, factor_key=TRUE) %>%
     group_by(Language, Year) %>%
     summarise(Pop=sum(population)) %>%
     ungroup() %>%
     mutate(Year = as.factor(Year))
   
-  dat.pop.t <- readxl::read_excel(paste0("data_raw/Population_district_1888_1900.xlsx"), sheet="Sheet1") %>%
+  dat.pop.t <- readxl::read_excel("data_raw/Population_district_1888_1900.xlsx", sheet="Sheet1") %>%
     gather(., Year, population, `1888`:`1900`, factor_key=TRUE) %>%
     group_by(Year) %>%
     summarise(Pop_total=sum(population)) %>%
@@ -17,7 +17,7 @@ function_obs_exp_language <- function() {
   dat.pop <-  dat.pop  %>%
     full_join(dat.pop.t)
   
-  dat.pop.diff.t <- readxl::read_excel(paste0("data_raw/Population_Age1888.xlsx"), sheet="Districts") %>%
+  dat.pop.diff.t <- readxl::read_excel("data_raw/Population_Age1888.xlsx", sheet="Districts") %>%
     filter(Agegroups=="Total") %>%
     group_by(Language) %>%
     summarise(Pop_UniGe=sum(Total)) %>%
@@ -26,7 +26,7 @@ function_obs_exp_language <- function() {
            Year = as.factor(Year)) %>%
     right_join(dat.pop)
   
-  dat.pop.diff.y <- readxl::read_excel(paste0("data_raw/Population_Age1888.xlsx"), sheet="Districts") %>%
+  dat.pop.diff.y <- readxl::read_excel("data_raw/Population_Age1888.xlsx", sheet="Districts") %>%
     filter(Agegroups=="Total") %>%
     summarise(Pop_UniGe_t=sum(Total)) %>%
     ungroup() %>%
@@ -35,14 +35,14 @@ function_obs_exp_language <- function() {
     right_join( dat.pop.diff.t)
   
   
-  dat.pop.diff.90.t <- readxl::read_excel(paste0("data_raw/Population_Age1888.xlsx"), sheet="Districts") %>%
+  dat.pop.diff.90.t <- readxl::read_excel("data_raw/Population_Age1888.xlsx", sheet="Districts") %>%
     filter(Agegroups=="90-95" |Agegroups==">=95" ) %>%
     summarise(Number_UniGe=sum(Total)) %>%
     ungroup() %>%
     mutate(Year=1888,
            Year = as.factor(Year))
 
-  dat.pop.diff.90 <- readxl::read_excel(paste0("data_raw/Population_Age1888.xlsx"), sheet="Districts") %>%
+  dat.pop.diff.90 <- readxl::read_excel("data_raw/Population_Age1888.xlsx", sheet="Districts") %>%
     filter(Agegroups=="90-95" |Agegroups==">=95" ) %>%
     group_by(Language) %>%
     summarise(Observed_UniGe=sum(Total)) %>%
@@ -51,13 +51,13 @@ function_obs_exp_language <- function() {
            Year = as.factor(Year)) %>%
     full_join(dat.pop.diff.90.t)
   
-  dat.dist1888 <-  readxl::read_excel(paste0("data_raw/Age_distribution_1888_1900.xlsx"), sheet="1888")  %>%
+  dat.dist1888 <-  readxl::read_excel("data_raw/Age_distribution_1888_1900.xlsx", sheet="1888")  %>%
     mutate(Year = 1888,
            Number_AgeDist = Frauen + Männer,
            Pop_AgeDist =  2922897) %>%
     dplyr::select(-Frauen, -Männer)
     
-  dat.dist1900 <-  readxl::read_excel(paste0("data_raw/Age_distribution_1888_1900.xlsx"), sheet="1900") %>%
+  dat.dist1900 <-  readxl::read_excel("data_raw/Age_distribution_1888_1900.xlsx", sheet="1900") %>%
     mutate(Year = 1900,
            Number_AgeDist = Frauen + Männer,
            Pop_AgeDist =  3318985) %>%

@@ -1,6 +1,6 @@
 function_altitude_diff_sen <- function(YearM) {
   
-  load("data/data.obs.exp.altitude_sen.RData")
+  load("../data/data.obs.exp.altitude_sen.RData")
 
   data.model <- data.obs.exp.altitude_sen %>%
       filter(Year == YearM) %>%
