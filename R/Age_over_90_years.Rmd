@@ -30,6 +30,12 @@ function_mapsPLZ_age(Year=1900, Place="Residential")
 <!-- function_spacial_age() -->
 <!-- ``` -->
 
+# Verteilungen
+
+```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 18}
+function_dist_age()
+```
+
 # Erhebungsjahr
 
 <!-- * Poisson Regression -->
@@ -85,7 +91,7 @@ function_sex_diff(YearM=1900)
 
 ## 1888
 
-Signifikant mehr Ü90 Personen im städtischen Gebieten.
+Signifikant mehr Ü90 Personen in ländlichen Gebieten.
 
 
 ```{r echo=FALSE}
@@ -106,7 +112,7 @@ function_urbanity_diff(YearM=1888)
 
 ## 1900
 
-Signifikant mehr Ü90 Personen im städtischen Gebieten.
+Signifikant mehr Ü90 Personen in ländlichen Gebieten.
 
 
 ```{r echo=FALSE}
@@ -399,27 +405,40 @@ function_altitude_sex_diff("1000")
 
 # Regression CO-factors
 
-Je niedriger BIP, desto mehr Ü90 (aber nicht signifikant), trotzdem andere Richtung als erwartet. Aber liegt es vielleicht daran, dass BIP und Wohnhöhe zusammenhängen? Genauso wie BIP und Sprachregionen? Das heisst eigentlich ist eher die Sprachregion und die Wohnhöhe der Faktor (unterschiedliche Lebensweisen), als BIP. In diesem Model kann ich nicht nach Sprachregion anpassen, dafür bräuchte ich noch ein sheet mit
-Sprache für jeden Bezirk, Wohnhöhe pro Bezirk ist eher schwierig (schwankt ja manchmal sehr pro Bezirk). TB war jetzt auch etwas schwieriger, da ich etwas andere Bezirke habe, wie in dieser Studie, diese müsste ich abgleiche, dauert etwas. Das gleiche wäre mit den Sprachregionen. Die Spitaldichte wäre noch interessant, aber diese war nicht mit den Bezirken aus dem sheet "3) Bezirke Vergleich" abgeglichen. 
+* Negative binomial regression
 
 <br />
 <br />
-
-Ansonsten ist die Körpergrösse noch interessant, 1900 zwar nicht signifikant, aber gleicher Trend wie 1888. Aber wir haben auch ein Power Problem. Haben ja nur wenige Ü90 Jährige pro Bezirk.
 
 ## 1888
+
+* height.1, LanguageFranzösisch.1, LanguageItalienisch.1 sind die Ergebnisse vom Model welches height und Sprachregion enthält
+* Auch nach dem height mit Sprachregion kontrolliert wurde, ist es noch signifkant.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_regression(YearM = 1888)
 ```
 
-
-
 ## 1900
+
+* Bezirke, welche schon 1888 einen höheren Anteil an 80+ Einwohnern haben, haben auch 1900 einen höheren Anteil an 90+ Personen.
 
 ```{r, echo=FALSE,message=FALSE,fig.height = 12,  fig.width = 15}
 function_regression(YearM = 1900)
 ```
+
+<!-- ## Supplement Plots -->
+
+
+<!-- ```{r, echo=FALSE,message=FALSE, warning=FALSE,fig.height = 10,  fig.width = 20} -->
+<!-- function_scatter() -->
+<!-- ``` -->
+
+
+<!-- ```{r, echo=FALSE,message=FALSE, warning=FALSE,fig.height = 10,  fig.width = 10} -->
+<!-- cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#0072B2", "#D55E00", "#CC79A7") -->
+<!-- function_violin() -->
+<!-- ``` -->
 
 <!-- # Regression Alter -->
 
