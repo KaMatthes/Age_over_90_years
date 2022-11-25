@@ -1,4 +1,6 @@
-  dat.pop.t <- readxl::read_excel("data/Population_urbanity.xlsx", sheet="Sheet1") %>%
+load("data/data_age90.RData")
+
+dat.pop.t <- readxl::read_excel("data/Population_urbanity.xlsx", sheet="Sheet1") %>%
     mutate(Year = as.factor(Year)) %>%
     group_by(Year) %>%
     summarise(Pop_total = sum(Population)) %>%
