@@ -40,7 +40,7 @@ This folder contains all R scripts.
   - `Negativebinomial_Regression.R`  : code of the negative biniomial regression models (Table 4)
   
 ### `data` folder
-
+  - `Data_1888_1900.xlsx`: complete data set of >=90 years old
   - `data_age90.RData`: spatial data for each person >=90 years old 
   - `Population_sex.xlsx` : contingency table for sex
   - `Population_urbanity.xlsx` : contingency table for urbanity
