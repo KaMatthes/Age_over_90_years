@@ -57,4 +57,4 @@ This folder contains figures of the publication.
 
 ### `master.R` 
 
-This skript contains information of the used R packages, R scripts, plotting parameters etc, please run first ` load("data/databern.RData")`.
+This skript contains information of the used R packages, R scripts, plotting parameters etc..
