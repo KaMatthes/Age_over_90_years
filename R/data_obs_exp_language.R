@@ -1,12 +1,12 @@
 load("data/data_age90.RData")
 
-  dat.pop <- readxl::read_excel("data/Population_district_1888_1900.xlsx") %>%
+  dat.pop <- readxl::read_excel("data/Language_district_1888_1900.xlsx") %>%
     group_by(Language, Year) %>%
     summarize(Population=sum(Population)) %>%
     ungroup() %>%
     mutate(Year = as.factor(Year))
   
-  dat.pop.t <-readxl::read_excel("data/Population_district_1888_1900.xlsx") %>%
+  dat.pop.t <-readxl::read_excel("data/Language_district_1888_1900.xlsx") %>%
     group_by(Year) %>%
     summarise(Pop_total=sum(Population)) %>%
     ungroup() %>%
