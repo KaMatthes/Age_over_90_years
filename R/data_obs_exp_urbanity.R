@@ -1,13 +1,10 @@
-function_obs_exp_urbanity <- function() {
-
-  
-  dat.pop.t <- readxl::read_excel("data_raw/Population_urbanity.xlsx", sheet="Sheet1") %>%
+  dat.pop.t <- readxl::read_excel("data/Population_urbanity.xlsx", sheet="Sheet1") %>%
     mutate(Year = as.factor(Year)) %>%
     group_by(Year) %>%
     summarise(Pop_total = sum(Population)) %>%
     ungroup()
   
-  dat.pop <- readxl::read_excel("data_raw/Population_urbanity.xlsx", sheet="Sheet1") %>%
+  dat.pop <- readxl::read_excel("data/Population_urbanity.xlsx", sheet="Sheet1") %>%
     mutate(Year = as.factor(Year)) %>%
     full_join(dat.pop.t) %>%
     group_by(Urbanity, Year) %>%
@@ -33,7 +30,6 @@ function_obs_exp_urbanity <- function() {
 
   save(  data.obs.exp.urbanity ,file=paste0("data/data.obs.exp.urbanity.RData"))
   write.xlsx(  data.obs.exp.urbanity ,file=paste0("data/data.obs.exp.urbanity.xlsx"),rowNames=FALSE, overwrite = TRUE)
-  
-}
+
   
  

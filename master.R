@@ -14,6 +14,11 @@ library(rmarkdown)
 library(kableExtra)
 library(lubridate)
 library(robmixglm)
+library(MASS)
+library(introdataviz)
+library(spdep)
+library(tmap)
+library(tmaptools)
 
 
 library(conflicted)
@@ -88,6 +93,7 @@ col3grey <- c("#bdbdbd","#f0f0f0", "#737373")
 col7magma <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "magma")
 col4magma <- viridis(4, alpha = 1, begin = 1, end = 0, direction = 1, option = "magma")
 col3magma <- col4magma[c(4,3,2)]
+cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
 # col7viridis <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "viridis")
 # col7rocket <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "rocket")
 # col7cividis <- viridis(7, alpha = 1, begin = 1, end = 0, direction = 1, option = "cividis")
@@ -95,16 +101,19 @@ col3magma <- col4magma[c(4,3,2)]
 brk_alt <- c(0,300,600,900,1200,1500,1800,2200)
 brk_alt_reg <- c(0,600,2200)
 brk_alt_poisson <- c(0,600,1000,Inf)
-brk_alt_poisson_sen <- c(0,600,900,Inf)
+# brk_alt_poisson_sen <- c(0,600,900,Inf)
 brk_age <- c(90,92,94,96,102)
 
 size_legend <- 15
 size_ggtitle <- 35
 size_striptext <- 25
+legend_size_title <- 1.5
+main_size_map <- 2
+legend_size_map <- 1.1
 
-
-source("R/maps.R")
+# source("R/maps.R")
 source("R/maps_age.R")
+source("R/Plot_Age.R")
 source("R/Sex_diff.R")
 source("R/Urbanity_diff.R")
 source("R/Language_diff.R")
@@ -114,6 +123,8 @@ source("R/Altitude_female_diff.R")
 source("R/Altitude_male_diff.R")
 source("R/Altitude_sex_diff.R")
 source("R/Regression_Districts.R")
+source("R/Supplement_Scatter.R")
+source("R/Supplement_violin.R")
 # source("R/Regression_AgeDead.R")
 # source("R/Spacial_Point_Process_Age.R")
   

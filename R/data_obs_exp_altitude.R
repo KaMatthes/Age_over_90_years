@@ -1,13 +1,12 @@
-function_obs_exp_altitude <- function() {
   load("data/data_age90.RData")
   
-  dat.pop.t <- readxl::read_excel("data_raw/Population_Altitude.xlsx", sheet="Sheet1") %>%
+  dat.pop.t <- readxl::read_excel("data/Population_Altitude.xlsx", sheet="Sheet1") %>%
     mutate(Year = as.factor(Year)) %>%
     group_by(Year) %>%
     summarise(Pop_total = sum(Population)) %>%
     ungroup()
   
-  dat.pop <- readxl::read_excel("data_raw/Population_Altitude.xlsx", sheet="Sheet1") %>%
+  dat.pop <- readxl::read_excel("data/Population_Altitude.xlsx", sheet="Sheet1") %>%
     mutate(Year = as.factor(Year)) %>%
     full_join(dat.pop.t) %>%
     mutate(Altitude = ifelse(Altitude=="< 400",  "< 600",Altitude),
@@ -51,6 +50,6 @@ function_obs_exp_altitude <- function() {
   save( data.obs.exp.altitude ,file=paste0("data/data.obs.exp.altitude.RData"))
   write.xlsx( data.obs.exp.altitude ,file=paste0("data/data.obs.exp.altitude.xlsx"),rowNames=FALSE, overwrite = TRUE)
   
-}
+
   
  
