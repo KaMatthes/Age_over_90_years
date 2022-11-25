@@ -1,17 +1,12 @@
 load("data/data_age90.RData")
-  #load("../data/data_age90.RData")
 
-  
-  
   data_age90_map <- data_age90 %>%
     dplyr::mutate(Alter_cat = cut(Alter,breaks=brk_age ,include.lowest = TRUE),
                   Alter_cat = ifelse(is.na(Alter_cat), "no Info", Alter_cat),
                   Alter_cat = as.factor(Alter_cat),
                   W_Hoehe_cat = cut(W_Hoehe,breaks=brk_alt_poisson ,include.lowest = TRUE))
-  # load map switzerland
   
    map_swiss <- read_sf("data/Maps_Switzerland/g2l15.shp")
-   #map_swiss <- read_sf("../data/maps/Timo/g2l15.shp")
    
    map_canton <- read_sf("data/Maps_Switzerland/g2k15.shp") %>%
      mutate(Language = KTNR,
@@ -44,13 +39,10 @@ load("data/data_age90.RData")
                               "9" = "German",
                               "1" = "German"),
             Language = as.factor(Language))
-   
-   # map_lake <- read_sf("data/maps/Timo/g2s15.shp")
    map_lake <- read_sf("data/Maps_Switzerland/g2s15.shp")
    
 
   relief <- raster("data/Maps_Switzerland/02-relief-ascii.asc") %>%
-    # hide relief outside of Switzerland by masking with country borders
     mask(map_swiss) %>%
     as("SpatialPixelsDataFrame") %>%
     as.data.frame() %>%
@@ -68,7 +60,6 @@ load("data/data_age90.RData")
                   guide = "none") +
       geom_sf(data=  map_lake, fill = "#D6F1FF",color = "transparent") +
       geom_point(data=datMaps,aes(x=W_E, y= W_N, col=W_Hoehe_cat, size=Alter_cat))+
-      # ggtitle(paste(Year))+
       scale_size_manual("Age:",
                         values = c(2,4,6,8,0.5),
                           breaks=c("1","2","3","4", "no Info"),
