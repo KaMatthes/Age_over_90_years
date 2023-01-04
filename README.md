@@ -9,7 +9,7 @@ submitted
 The data is public available via Zenodo:
 <br >
 <br >
-to add
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7503867.svg)](https://doi.org/10.5281/zenodo.7503867)
 
 ## Content of this repository
 
