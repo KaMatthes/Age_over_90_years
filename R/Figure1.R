@@ -28,7 +28,7 @@ dat_text_male <- data.frame(
 Figure1 <- ggplot(data=data_age) +
   # geom_line(aes(x=age, y=number, col=sex), lwd=1.5) +
   geom_bar(aes(x=age, y=number,fill=sex),stat="identity") +
-  annotate("rect",xmin=90,xmax=100,ymin=0,ymax=Inf, alpha=0.2,fill="wheat4") +
+  annotate("rect",xmin=90,xmax=100,ymin=0,ymax=Inf, alpha=0.2,fill=cbp1[3]) +
   annotate("text",x=67,y=65000, label="Percentage of >= 90-years-old:", size=6) +
   facet_grid(~year) +
   geom_text(data = dat_text_female,mapping = aes(x = 56.2, y = 61500, label = label),size=6)+

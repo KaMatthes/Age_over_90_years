@@ -1,5 +1,3 @@
-.libPaths(c("H:/Documents/R/win-library/4.1", "C:/Program Files/R/R-4.2.1/library"))
-
 library(tidyverse)
 library(dplyr)
 library(readxl)
