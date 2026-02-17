@@ -49,37 +49,7 @@ legend_size_title <- 1.5
 main_size_map <- 2
 legend_size_map <- 1.1
 
-# load Skripts
-source("R/Figure1.R")
-source("R/Figure2.R")
-source("R/Figure3.R")
-source("R/Supplement_Figure6.R")
-source("R/Supplement_Figure7.R")
-source("R/data_obs_exp_sex.R")
-source("R/data_obs_exp_urbanity.R")
-source("R/data_obs_exp_language.R")
-source("R/data_obs_exp_altitude.R")
-source("R/r01_poisson_regression.R")
-source("R/Negativebinomial_Regression.R")
 
-# run functions fpr Poisson regressions
-
-function_poisson2_regression(1888, "Sex")
-function_poisson_regression(1888, "Urbanity")
-function_poisson_regression(1888, "Language")
-function_poisson_regression(1888, "Altitude")
-
-function_poisson_regression(1900, "Sex")
-function_poisson_regression(1900, "Urbanity")
-function_poisson_regression(1900, "Language")
-function_poisson_regression(1900, "Altitude")
-
-
-# run functions fpr Poisson regressions
-
-suppressWarnings(function_regression_nb(1888))
-suppressWarnings(function_regression_nb(1900))
-# 
 
 
 

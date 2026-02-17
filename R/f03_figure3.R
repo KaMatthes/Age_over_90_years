@@ -90,3 +90,5 @@ ggplot(bezirk_geo.gi) +
 
 ggsave("output/Figure3.png",height=8, width=20,  dpi = 1000)
 ggsave("output/Figure3.pdf",height=8, width=20)
+
+ggsave("output/Figure3.eps",height=8, width=20)

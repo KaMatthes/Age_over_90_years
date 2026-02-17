@@ -1,10 +1,10 @@
 rm(list=ls())
 source("R/00_setup.R")
 
-data.cofactors.1888 <- read_excel("data_raw/Cofactors_1888.xlsx") %>%
+data.cofactors.1888 <- read_excel("data/Cofactors_1888.xlsx") %>%
   mutate(Prop80 = as.numeric(Prop80))
 
-data.cofactors <-  read_excel("data_raw/Cofactors_1900.xlsx") %>%
+data.cofactors <-  read_excel("data/Cofactors_1900.xlsx") %>%
   mutate(height  = as.numeric(height),
          TB = as.numeric(TB),
          TB_1888 = as.numeric(TB_1888)) %>%
@@ -62,5 +62,5 @@ Figure_language <- ggplot(data=data.cofactors,aes(y=U90_inc,x=tempx, fill = Lang
 
 
 Supplement_Figure7 <- plot_grid(Figure_hosp, Figure_language, nrow = 2)
-cowplot::save_plot("output/Supplement_Figure7.pdf", Supplement_Figure7,base_height=15,base_width=15)
-  
+save_plot("output/Supplement_Figure7.pdf", Supplement_Figure7,base_height=15,base_width=15)
+save_plot("output/Supplement_Figure7.png", Supplement_Figure7,base_height=15,base_width=15, dpi=1000)

@@ -1,10 +1,10 @@
 rm(list=ls())
 source("R/00_setup.R")
 
-data.cofactors.1888 <- read_excel("data_raw/Cofactors_1888.xlsx") %>%
+data.cofactors.1888 <- read_excel("data/Cofactors_1888.xlsx") %>%
   mutate(Prop80 = as.numeric(Prop80))
 
-data.cofactors <-  read_excel("data_raw/Cofactors_1900.xlsx") %>%
+data.cofactors <-  read_excel("data/Cofactors_1900.xlsx") %>%
   mutate(height  = as.numeric(height),
          TB = as.numeric(TB),
          TB_1888 = as.numeric(TB_1888)) %>%
@@ -25,7 +25,7 @@ data.cofactors <-  read_excel("data_raw/Cofactors_1900.xlsx") %>%
                                                    "Educational test", "Prop.80+ years","Tb")))
 
 
-Supplement_Figure6 <- ggplot(data=data.cofactors) +
+ ggplot(data=data.cofactors) +
   geom_point(aes(y=U90_inc, x=measurement, col=Language), lwd=2) +
   geom_smooth(aes(y=U90_inc, x=measurement),  method='rlm',se=TRUE, col="grey30") +
   facet_grid(Year~condition, scales="free_x") +
@@ -45,6 +45,7 @@ Supplement_Figure6 <- ggplot(data=data.cofactors) +
         plot.title = element_text(size=15),
         legend.position = "bottom")
 
-cowplot::save_plot("output/Supplement_Figure6.pdf", Supplement_Figure6 ,base_height=10,base_width=25)
   
+ggsave("output/Supplement_Figure6.pdf",height=10, width=25)
+ggsave("output/Supplement_Figure6.png",height=10, width=18,  dpi = 1000)
 

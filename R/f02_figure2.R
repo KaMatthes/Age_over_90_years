@@ -102,4 +102,5 @@ ggplot()+
 ggsave("output/Figure2.png",height=10, width=20,  dpi = 1000)
 ggsave("output/Figure2.pdf",height=10, width=20)
 
+ggsave("output/Figure2.eps",height=10, width=20)
     

@@ -85,3 +85,7 @@ function_regression_nb <- function(YearM) {
   results_regression
 
 }
+
+
+suppressWarnings(function_regression_nb(1888))
+suppressWarnings(function_regression_nb(1900))

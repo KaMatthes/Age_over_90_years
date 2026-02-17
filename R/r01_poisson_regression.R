@@ -88,3 +88,13 @@ function_poisson_regression <- function(YearM, Variable_s) {
 return(res)
     
 }
+
+function_poisson_regression(1888, "Sex")
+function_poisson_regression(1888, "Urbanity")
+function_poisson_regression(1888, "Language")
+function_poisson_regression(1888, "Altitude")
+
+function_poisson_regression(1900, "Sex")
+function_poisson_regression(1900, "Urbanity")
+function_poisson_regression(1900, "Language")
+function_poisson_regression(1900, "Altitude")

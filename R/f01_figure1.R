@@ -61,3 +61,5 @@ ggsave("output/Figure1.pdf",height=10, width=18)
 
 ggsave("output/Figure1.png",height=10, width=18,  dpi = 1000)
 
+ggsave("output/Figure1.eps",height=10, width=18)
+
