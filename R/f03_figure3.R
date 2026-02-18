@@ -6,7 +6,7 @@ bezirk_geo <- read_sf("data/Map_data_1918/districts.shp") %>%
       id= as.character(id)
     ) 
 
-data_map <- read_xlsx("data/Hotspot.xlsx") %>%
+data_map <- read.xlsx("data/Hotspot.xlsx") %>%
     mutate(
       Inc=number/population*100000
     ) %>%
@@ -54,12 +54,12 @@ bezirk_geo.gi <- bezirk_geo.gi1888  %>%
   rbind(bezirk_geo.gi1900) %>%
   mutate(
     zvalue = case_when(
-      gstat < -2                   ~ "< -2",
-      gstat >= -2 & gstat <= -1    ~ "-2 to -1",
-      gstat > -1  & gstat <= 1     ~ "-1 to 1",
-      gstat > 1   & gstat <= 2     ~ "1 to 2",
-      gstat > 2                    ~ "> 2"),
-    zvalue = factor(zvalue, levels = c("< -2", "-2 to -1", "-1 to 1", "1 to 2", "> 2"))
+      gstat <= -2                   ~ "≤ -2",
+      gstat > -2 & gstat <= -1    ~ "> -2 to ≤ -1",
+      gstat > -1  & gstat <= 1     ~ "> -1 to < 1",
+      gstat >= 1   & gstat < 2     ~ "≥ 1 to <2",
+      gstat >= 2                    ~ "≥ 2"),
+    zvalue = factor(zvalue, levels = c("≤ -2", "> -2 to ≤ -1", "> -1 to < 1", "≥ 1 to <2", "≥ 2"))
   )
 
 ggplot(bezirk_geo.gi) +
@@ -91,4 +91,4 @@ ggplot(bezirk_geo.gi) +
 ggsave("output/Figure3.png",height=8, width=20,  dpi = 1000)
 ggsave("output/Figure3.pdf",height=8, width=20)
 
-ggsave("output/Figure3.eps",height=8, width=20)
+# ggsave("output/Figure3.eps",height=8, width=20)
